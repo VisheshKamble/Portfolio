@@ -38,3 +38,14 @@ TODO: real links (Work.jsx Contact, Dark.jsx drawer buttons), timeline years, ph
 - Closing scene (`Contact` in `Work.jsx`): the line leaves "oh, hi." and swoops behind your head (path measured from the live layout), sparks pop above you, cricket bat + "fun fact: i wanted to be a cricketer. even played for mumbai u16." Replace the placeholder email/links (TODO).
 - `me.webp` is low-res (156px wide, upscaled 2x): drop in a higher-res cut-out with the same name for a crisper result.
 - Polish: scroll cue, paper grain, nicer buttons, mobile layout for the closing scene.
+
+## v8 notes
+- Opening scribble is a dense tangle (`scrib()` in `World.jsx`; change the seed/count to reshape it). The pen ends inside it and the one continuous line starts there (`P[0]` in `line.js`), so scrolling pulls the line out of the scribble. The frame's words appear after it finishes.
+- Jack of all trades is tightened (`S`, `ART` in `line.js`).
+- Timeline: six chapters (`TL`), text only. Hovering/focusing/tapping a chapter shows a blue link bubble. Set your real GitHub URLs in `GH` / `LINKS` at the top of `World.jsx` (they currently open github.com; LeetCode is already set).
+
+## v6.3 notes (closing scene)
+- The swoop now stops just ABOVE the head (gap + crest are computed in `Contact`, `Work.jsx`) instead of tucking behind it; the sparks moved up-right of the head.
+- New notes: "did you peek at the rabbit holes yet? go on. i'll wait." (clickable, triggers the same dive as the "more rabbit holes" pill via `onDive`) and "that's all about me." above **signing off**, written with one pen line (`src/signoff.js`, a single-stroke script path drawn with the same dash-offset trick as the main line, starts after the swoop finishes).
+- `me.webp` re-cut: 2x Lanczos upscale, pale matte halo removed, sharpened. It now stands on a soft contact shadow (`.me::before`) instead of a big floating drop-shadow, is a bit smaller, and is no longer faded on mobile. A higher-res original photo cut-out (same filename) will still look best.
+- v6.3: the "flutter came first." sticker is now a 3D phone with gears + code tag (`src/assets/flutter-phone.webp`, wired as `S.phones` in `stickers.jsx`; size/position in `World.jsx`).
