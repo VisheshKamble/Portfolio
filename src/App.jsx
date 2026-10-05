@@ -29,7 +29,7 @@ export default function App() {
           : <div><a href="#brain" onClick={e => out(e, 'top')}>brain</a><a href="#all-work" className="cur">work</a><a href="#gh">github</a><a href="#talk" onClick={e => out(e, 'talk')}>let's talk</a></div>}
       </nav>
       {view === 'light'
-        ? <main><World /><Work onDive={go} /><Contact /></main>
+        ? <main><World /><Work onDive={go} /><Contact onDive={go} /></main>
         : <main><Dark openTitle={open} /></main>}
       {dive && <Dive d={dive} onMid={mid} onEnd={() => setDive(null)} />}
       <Cursor />
