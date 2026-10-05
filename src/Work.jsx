@@ -3,6 +3,7 @@ import { all } from './details.jsx'
 import { Phone, Browser } from './Devices.jsx'
 import Detail from './Detail.jsx'
 import { S } from './stickers.jsx'
+import { SIGN } from './signoff.js'
 
 const FILTERS = [['All', 'all'], ['Apps', 'apps'], ['Agentic AI', 'agents']]
 
@@ -53,16 +54,17 @@ export function Work({ onDive }) {
   )
 }
 
-export function Contact() {
+export function Contact({ onDive }) {
   const sec = useRef(), hi = useRef(), fig = useRef(), path = useRef(), [on, setOn] = useState(false), [d, setD] = useState('')
   useEffect(() => { const io = new IntersectionObserver(([e]) => e.isIntersecting && setOn(true), { threshold: .3 }); io.observe(sec.current); return () => io.disconnect() }, [])
   useLayoutEffect(() => {
-    // the line leaves the end of "oh, hi." and swoops across the page to tuck in behind Vishesh's head (measured from the real layout)
+    // the line leaves the end of "oh, hi.", swoops across the page and stops just ABOVE Vishesh's head (measured from the real layout)
     const lay = () => {
       const s = sec.current.getBoundingClientRect(), h = hi.current.getBoundingClientRect(), f = fig.current.getBoundingClientRect()
       if (innerWidth < 900) return setD('')
-      const sx = h.right - s.left + 14, sy = h.top - s.top + h.height * .62, ex = f.left - s.left + f.width * .42, ey = f.top - s.top + f.height * .075, dx = ex - sx, low = sy + 150
-      setD(`M${sx} ${sy}C${sx + dx * .2} ${sy - 55} ${sx + dx * .26} ${low - 10} ${sx + dx * .46} ${low}S${sx + dx * .66} ${low - 30} ${sx + dx * .78} ${sy - 30}S${ex - dx * .06} ${ey - 40} ${ex} ${ey}`)
+      const sx = h.right - s.left + 14, sy = h.top - s.top + h.height * .62, ex = f.left - s.left + f.width * .47, top = f.top - s.top
+      const cy = Math.max(top - 125, 96), ey = Math.max(top - 62, cy + 42), dx = ex - sx, low = sy + 150 // cy = crest, ey = where the pen lifts (a gap above the head)
+      setD(`M${sx} ${sy}C${sx + dx * .2} ${sy - 55} ${sx + dx * .26} ${low - 10} ${sx + dx * .46} ${low}S${sx + dx * .72} ${cy + 8} ${sx + dx * .85} ${cy}C${sx + dx * .93} ${cy - 8} ${ex + 6} ${ey - 50} ${ex} ${ey}`)
     }
     lay(); document.fonts?.ready.then(lay); addEventListener('resize', lay); const t = setTimeout(lay, 400)
     return () => { removeEventListener('resize', lay); clearTimeout(t) }
@@ -88,6 +90,14 @@ export function Contact() {
         <svg className="spark" viewBox="0 0 80 50" aria-hidden="true"><path d="M10 40 20 22M38 30V6M62 40 74 20" /></svg>
       </div>
       <span className="hand note n1"><svg viewBox="0 0 40 30" width="34" aria-hidden="true"><path d="M34 6C20 8 10 14 6 26M6 26l1-10M6 26l10-5" /></svg>that's me, mid-thought,<br />somewhere between<br />two rabbit holes.</span>
+      <a className="hand note n2" href="#work" data-b="go on, fall in" onClick={e => { e.preventDefault(); const r = e.currentTarget.getBoundingClientRect(); onDive?.(r.left + r.width / 2, r.top + r.height / 2, 'dark') }}>
+        did you peek at the<br />rabbit holes yet?<br />go on. i'll wait.
+        <svg viewBox="0 0 50 34" width="40" aria-hidden="true"><path d="M4 6C16 4 34 8 44 24M44 24l-2-12M44 24l-12-6" /></svg>
+      </a>
+      <div className="sign">
+        <span className="hand">that's all about me.<svg viewBox="0 0 50 34" width="38" aria-hidden="true"><path d="M4 6C16 4 34 8 44 24M44 24l-2-12M44 24l-12-6" /></svg></span>
+        <svg className="sg" viewBox={`0 0 ${SIGN.w} ${SIGN.h}`} role="img" aria-label="signing off"><path pathLength="1" d={SIGN.d} /><path className="sw" pathLength="1" d={SIGN.swoosh} /></svg>
+      </div>
       <footer>© 2026 vishesh · <a href="#brain">back to top ↑</a></footer>
     </section>
   )
