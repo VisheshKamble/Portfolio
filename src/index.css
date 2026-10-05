@@ -219,7 +219,7 @@ a.sbub:hover,a.sbub:focus-visible{background:#2b94ff;outline:none}
 /* timeline nodes + cards */
 .node .nr{fill:var(--bg);stroke:var(--ink);stroke-width:2.5}.node .nd{fill:var(--ink)}
 .node .tk{fill:none;stroke:var(--mute);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:2 6}
-.node .star{fill:var(--star);stroke:var(--ink);stroke-width:2.4;stroke-linejoin:round;transform-box:fill-box;transform-origin:center}
+.node .star{transform-box:fill-box;transform-origin:center}
 .node .burst path{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;opacity:0;transform-box:view-box}
 .node.on .burst path{animation:burst .9s ease-out both}@keyframes burst{0%{opacity:0;stroke-dasharray:0 9}25%{opacity:1}100%{opacity:0;stroke-dasharray:9 9;transform:scale(1.5)}}
 .node.on .star{animation:starpop .8s cubic-bezier(.3,1.7,.5,1) both}@keyframes starpop{from{transform:scale(.2) rotate(-80deg)}}
@@ -309,10 +309,10 @@ body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opa
 .outer .pen{opacity:0;transition:opacity .6s}.outer.drawn .pen{opacity:1}
 .tl{pointer-events:auto}
 .tl .tlb{position:absolute;left:50%;z-index:6;white-space:nowrap;font-size:max(13px,calc(20*var(--u)));pointer-events:none}
-.tl.up .tlb{bottom:100%;margin-bottom:6px}.tl.dn .tlb{bottom:auto;top:100%;margin-top:6px;transform-origin:50% 0;transform:translate(-50%,-12px) scale(.82)}
+.tl.up .tlb{bottom:100%;margin-bottom:6px}.tl.dn .tlb{bottom:100%;top:auto;margin:0 0 4px;left:calc(50% + 24px);transform-origin:0 100%;transform:translate(0,10px) scale(.82)}
 .tl:hover .tlb,.tl:focus-within .tlb{opacity:1;pointer-events:auto}
 .tl.up:hover .tlb,.tl.up:focus-within .tlb{transform:translate(-50%,-4px) scale(1)}
-.tl.dn:hover .tlb,.tl.dn:focus-within .tlb{transform:translate(-50%,4px) scale(1)}
+.tl.dn:hover .tlb,.tl.dn:focus-within .tlb{transform:translate(0,0) scale(1)}
 .tl .tlb::after{content:"";position:absolute;left:-10%;right:-10%;height:22px}
-.tl.up .tlb::after{top:100%}.tl.dn .tlb::after{bottom:100%}
+.tl.up .tlb::after,.tl.dn .tlb::after{top:100%}
 .pen{stroke:var(--bg);stroke-width:3.5}
