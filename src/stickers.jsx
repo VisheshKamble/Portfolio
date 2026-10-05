@@ -10,6 +10,7 @@ import leetcodeImg from './assets/leetcode.webp'
 import laptop3Img from './assets/laptop3d.webp'
 import artImg from './assets/art.webp'
 import meImg from './assets/me.webp'
+import phoneImg from './assets/flutter-phone.webp'
 const img = (src, alt, w, h) => <img src={src} alt={alt} width={w} height={h} draggable={false} />
 const sh = <ellipse className="sh" cx="70" cy="108" rx="46" ry="6" />
 export const S = {
@@ -17,14 +18,14 @@ export const S = {
   laptop: img(laptopImg, 'a laptop with a smiley and a cat sticker', 265, 193),
   keys: img(keysImg, 'four black keycaps: airplane, code, cloud and a blue cricket one', 386, 306),
   polaroid: <svg viewBox="0 0 140 120">{sh}<rect className="f" x="62" y="8" width="64" height="76" rx="3" transform="rotate(7 94 46)"/><path className="o" d="M72 66l16-18 12 12 8-8 14 14" transform="rotate(7 94 46)"/><rect className="y" x="10" y="42" width="74" height="54" rx="12"/><circle className="f" cx="47" cy="69" r="19"/><circle className="o" cx="47" cy="69" r="8"/><circle className="f" cx="72" cy="52" r="4"/></svg>,
-  phones: <svg viewBox="0 0 120 130">{sh}<rect className="f" x="32" y="6" width="56" height="108" rx="13"/><path className="o" d="M52 15h16"/><path className="y" d="M60 36l15 14-15 40-15-40z"/><path className="o" d="M14 50q-8 18 0 36M106 50q8 18 0 36"/></svg>,
+  phones: img(phoneImg, 'a 3D phone with gears and a code tag, for building apps', 520, 729),
   phones2: <svg viewBox="0 0 120 130">{sh}<path className="f" d="M30 104V58q0-8 8-8t8 8V40q0-8 8-8t8 8v-4q0-8 8-8t8 8v10q0-6 8-6t8 6v42q0 20-20 20H52q-22 0-22-20z" transform="translate(0 -4)"/><path className="y" d="M26 20l4 8 8-4-4 8 8 4-8 4 4 8-8-4-4 8-4-8-8 4 4-8-8-4 8-4-4-8 8 4z" transform="scale(.6) translate(-6 0)"/></svg>,
   phones3: <svg viewBox="0 0 130 130">{sh}<path className="f" d="M65 14c-24-10-48 6-44 30-10 8-6 26 6 30 0 14 14 24 28 20 14 4 28-6 28-20 12-4 16-22 6-30 4-24-20-40-24-30z" transform="translate(0 4)"/><path className="o" d="M65 22v78M44 48q10 6 21 0M86 60q-10 6-21 0M42 76q12 4 23 0"/><circle className="y" cx="104" cy="28" r="9"/></svg>,
   head: img(headImg, 'beige over-ear headphones', 449, 556),
   astronaut: img(astronautImg, 'a cartoon astronaut floating in space', 382, 438),
   rhead: img(rheadImg, 'black over-ear headphones', 720, 672),
   leetcode: img(leetcodeImg, 'the LeetCode logo in glossy 3D', 470, 560),
-  me: img(meImg, 'Vishesh, in sunglasses and a leather bomber', 312, 1018),
+  me: img(meImg, 'Vishesh, in sunglasses and a leather bomber', 616, 2028),
   art: img(artImg, 'a head holding pens, a brush and a pencil, like a pen pot', 345, 448),
   brain: img(brainImg, 'a glossy iridescent brain', 760, 623),
   cricket: img(cricketImg, 'a cricket bat and a red ball', 347, 566),
