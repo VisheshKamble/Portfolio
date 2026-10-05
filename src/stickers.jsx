@@ -8,6 +8,8 @@ import rheadImg from './assets/headphones-rh.webp'
 import brainImg from './assets/brain.webp'
 import leetcodeImg from './assets/leetcode.webp'
 import laptop3Img from './assets/laptop3d.webp'
+import artImg from './assets/art.webp'
+import meImg from './assets/me.webp'
 const img = (src, alt, w, h) => <img src={src} alt={alt} width={w} height={h} draggable={false} />
 const sh = <ellipse className="sh" cx="70" cy="108" rx="46" ry="6" />
 export const S = {
@@ -21,7 +23,9 @@ export const S = {
   head: img(headImg, 'beige over-ear headphones', 449, 556),
   astronaut: img(astronautImg, 'a cartoon astronaut floating in space', 382, 438),
   rhead: img(rheadImg, 'black over-ear headphones', 720, 672),
-  leetcode: img(leetcodeImg, 'the LeetCode logo', 317, 367),
+  leetcode: img(leetcodeImg, 'the LeetCode logo in glossy 3D', 470, 560),
+  me: img(meImg, 'Vishesh, in sunglasses and a leather bomber', 312, 1018),
+  art: img(artImg, 'a head holding pens, a brush and a pencil, like a pen pot', 345, 448),
   brain: img(brainImg, 'a glossy iridescent brain', 760, 623),
   cricket: img(cricketImg, 'a cricket bat and a red ball', 347, 566),
   globe: <svg viewBox="0 0 130 120">{sh}<circle className="f" cx="65" cy="58" r="30"/><path className="o" d="M36 54q29 14 58 0M44 80q21-10 42 0"/><ellipse className="o" cx="65" cy="58" rx="56" ry="17" transform="rotate(-24 65 58)"/><circle className="y" cx="112" cy="36" r="7"/></svg>,

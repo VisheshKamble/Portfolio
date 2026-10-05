@@ -29,3 +29,12 @@ TODO: real links (Work.jsx Contact, Dark.jsx drawer buttons), timeline years, ph
 - v5.3: Aurix now has its real screens (`src/assets/shots/aurix-1..3.webp`: dashboard, nutrition, progress) in the swipeable iPhone. Exported at the phone-screen aspect (0.444) so nothing is cropped; re-export new ones the same way, or just drop `aurix-N.png` files and delete the .webp ones.
 - v5.4: NexusPay (UPI detection system) now has its real screens (`nexuspay-1..3.webp`: onboarding, home / fraud intelligence center, payment risk warning). Android status/nav bars were cropped so only the iPhone chrome shows. Screen 3 is low-res (239px wide): re-capture it larger for a crisper result. NexusPay's tech stack is still empty in `src/details.jsx`.
 - v5.5: VANI has its real screens (`vani-1..3.webp`: home, live recognition, emergency alert centre). All three apps (NexusPay, VANI, Aurix) now show real swipeable screenshots.
+
+## v6.1 notes
+- Scribble: seven hand-drawn "thoughts" (`DD` / `DOODLE` in `World.jsx`) draw themselves around the knot, wobble on hover and carry cursor-bubble text; the faint second pass slowly sways.
+- Jack of all trades: new trade = art (`art.webp`, "doodles, mostly"). The line is threaded THROUGH its head: it passes in front of both ears and behind the face (second SVG layer + `clipPath#weave` in `World.jsx`, geometry in `ART` in `line.js`). "all trades" gets a hand-drawn underline.
+- LeetCode sticker uses the new 3D logo (`leetcode.webp`).
+- Timeline: the line itself rises and falls through five chapters (`TLN` in `line.js`). Each node pops a ring burst when the pen arrives, with a small doodle (phone, YOLO box, two towers, agent graph, grad cap) opposite its card; the last node is a star.
+- Closing scene (`Contact` in `Work.jsx`): the line leaves "oh, hi." and swoops behind your head (path measured from the live layout), sparks pop above you, cricket bat + "fun fact: i wanted to be a cricketer. even played for mumbai u16." Replace the placeholder email/links (TODO).
+- `me.webp` is low-res (156px wide, upscaled 2x): drop in a higher-res cut-out with the same name for a crisper result.
+- Polish: scroll cue, paper grain, nicer buttons, mobile layout for the closing scene.

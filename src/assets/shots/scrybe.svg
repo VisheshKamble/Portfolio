@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1470 768">
+  <rect width="1470" height="768" fill="#303de4"/>
+  <g fill="#fff" opacity=".16">
+    <circle cx="26" cy="10" r="2"/><circle cx="74" cy="9" r="2"/><circle cx="122" cy="30" r="2"/><circle cx="181" cy="12" r="2"/><circle cx="240" cy="34" r="2"/><circle cx="305" cy="10" r="2"/><circle cx="370" cy="28" r="2"/><circle cx="430" cy="11" r="2"/><circle cx="495" cy="37" r="2"/><circle cx="557" cy="17" r="2"/><circle cx="630" cy="28" r="2"/><circle cx="700" cy="12" r="2"/><circle cx="770" cy="35" r="2"/><circle cx="845" cy="14" r="2"/><circle cx="920" cy="31" r="2"/><circle cx="1000" cy="13" r="2"/><circle cx="1080" cy="34" r="2"/><circle cx="1160" cy="11" r="2"/><circle cx="1240" cy="29" r="2"/><circle cx="1320" cy="13" r="2"/><circle cx="1400" cy="35" r="2"/>
+  </g>
+  <circle cx="1330" cy="40" r="360" fill="#ee4691"/>
+  <circle cx="70" cy="785" r="120" fill="#713be8"/>
+  <g transform="translate(69 16)">
+    <rect width="1340" height="70" rx="36" fill="#fff" stroke="#101323" stroke-width="3"/>
+    <rect x="1150" y="8" width="182" height="54" rx="28" fill="#ffdb4d" stroke="#101323" stroke-width="2"/>
+    <rect x="20" y="12" width="36" height="36" rx="9" fill="#101323"/>
+    <text x="31" y="39" font-family="Arial,sans-serif" font-size="24" font-weight="800" fill="#fff">s</text>
+    <text x="66" y="43" font-family="Arial,sans-serif" font-size="23" font-weight="800" fill="#101323">Scrybe</text>
+    <g fill="#59617e" font-family="Arial,sans-serif" font-size="16" font-weight="700"><text x="395" y="41">What it reads</text><text x="535" y="41">Who it’s for</text><text x="660" y="41">How it runs</text><text x="785" y="41">Run it</text><text x="864" y="41">Limits</text></g>
+    <text x="1172" y="43" font-family="Arial,sans-serif" font-size="16" font-weight="800" fill="#101323">Open the app  →</text>
+  </g>
+  <g transform="translate(96 110)">
+    <rect width="372" height="38" rx="20" fill="#5168ec" stroke="#91a1ff" stroke-width="1"/>
+    <rect x="8" y="5" width="108" height="28" rx="14" fill="#ffda3e"/>
+    <text x="20" y="25" font-family="Arial,sans-serif" font-size="14" font-weight="800" fill="#101323">Open source</text>
+    <text x="127" y="25" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#fff">Video intelligence on LangGraph</text>
+  </g>
+  <g font-family="Arial,sans-serif" font-weight="900" fill="#fff" font-size="88">
+    <text x="96" y="254">Paste a video.</text><text x="96" y="346">Get back</text><text x="96" y="438">what was</text>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="88" font-weight="900" fill="#101323">
+    <rect x="96" y="462" width="204" height="83" rx="15" fill="#ffdc3d" transform="rotate(-2 198 503)"/><text x="112" y="530">said,</text>
+    <rect x="337" y="463" width="315" height="83" rx="15" fill="#24aef1" transform="rotate(2 495 504)"/><text x="354" y="530">shown</text>
+    <rect x="309" y="554" width="198" height="82" rx="15" fill="#10ceaa" transform="rotate(-1 408 595)"/><text x="326" y="620">and true.</text>
+  </g>
+  <text x="96" y="690" font-family="Arial,sans-serif" font-size="20" fill="#dbe0ff">Scrybe transcribes the audio, reads the slides and code on screen,</text>
+  <g transform="translate(804 316)">
+    <rect x="0" y="0" width="545" height="410" rx="24" fill="#fff" stroke="#101323" stroke-width="3"/>
+    <path d="M0 0h545v77H0z" fill="#ff7848"/>
+    <text x="25" y="38" font-family="Arial,sans-serif" font-size="18" font-weight="800" fill="#101323">How transformers actually work</text>
+    <rect x="418" y="23" width="100" height="34" rx="18" fill="#fff" stroke="#101323" stroke-width="2"/>
+    <text x="434" y="45" font-family="Arial,sans-serif" font-size="14" font-weight="800" fill="#101323">5 chapters</text>
+    <g transform="translate(25 137)"><rect width="68" height="43" rx="9" fill="#dee4ff"/><rect x="74" width="128" height="43" rx="9" fill="#f8dce7"/><rect x="208" width="108" height="43" rx="9" fill="#c4f1e6"/><rect x="324" width="94" height="43" rx="9" fill="#e5dcff"/><rect x="426" width="68" height="43" rx="9" fill="#ff7848"/><g font-family="Arial,sans-serif" font-size="13" font-weight="800" fill="#4550d8"><text x="10" y="27">1</text><text x="88" y="27">2</text><text x="222" y="27">3</text><text x="338" y="27">4</text><text x="440" y="27" fill="#101323">5</text></g></g>
+    <g font-family="Arial,sans-serif"><rect x="25" y="209" width="38" height="26" rx="8" fill="#ff7848"/><text x="34" y="228" font-size="15" font-weight="800" fill="#101323">5/5</text><text x="73" y="229" font-size="18" font-weight="800" fill="#101323">Takeaways</text><text x="25" y="275" font-size="14" fill="#a7aec1">8:56</text><text x="80" y="275" font-size="15" fill="#c5cad8">Training it cost under a million dollars.</text><text x="25" y="316" font-size="14" fill="#a7aec1">11:30</text><text x="80" y="316" font-size="15" font-weight="700" fill="#101323">The takeaway: attention scales, and scale is what</text><text x="80" y="339" font-size="15" font-weight="700" fill="#101323">changed.</text></g>
+    <rect x="25" y="382" width="495" height="14" rx="7" fill="#c8f0e6"/>
+  </g>
+  <g transform="rotate(-7 870 365)"><rect x="760" y="349" width="215" height="42" rx="14" fill="#0dd0a9" stroke="#101323" stroke-width="3"/><text x="779" y="377" font-family="Arial,sans-serif" font-size="16" font-weight="800" fill="#101323">✓ 2 of 2 claims checked</text></g>
+  <g transform="rotate(5 1270 576)"><rect x="1217" y="555" width="160" height="42" rx="14" fill="#ed3e86" stroke="#101323" stroke-width="3"/><text x="1235" y="582" font-family="Arial,sans-serif" font-size="16" font-weight="800" fill="#101323">Now: Takeaways</text></g>
+</svg>

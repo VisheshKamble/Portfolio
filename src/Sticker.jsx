@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { S } from './stickers.jsx'
 
 // A sticker that "types" a chat bubble above itself on hover / focus / tap.
-export function Stk({ k, label, tip, href, x, y, w, r = 0 }) {
+export function Stk({ k, label, tip, href, x, y, w, r = 0, still }) {
   const [on, setOn] = useState(false), [n, setN] = useState(0)
   useEffect(() => {
     if (!on) { setN(0); return }
@@ -14,7 +14,7 @@ export function Stk({ k, label, tip, href, x, y, w, r = 0 }) {
   const open = e => { if (href && lastPtr.current !== 'touch' && !e.target.closest('a')) window.open(href, '_blank', 'noopener,noreferrer') } // touch: tap shows the bubble, tap the bubble to go
   const mouse = v => e => e.pointerType !== 'touch' && setOn(v) // touch uses focus (tap)
   return (
-    <div className={'at stk' + (on ? ' on' : '') + (href ? ' lnk' : '')} style={{ '--x': x, '--y': y, '--w': w, '--rot': r + 'deg' }}
+    <div className={'at stk' + (on ? ' on' : '') + (href ? ' lnk' : '') + (still ? ' still' : '')} style={{ '--x': x, '--y': y, '--w': w, '--rot': r + 'deg' }}
       tabIndex={0} role="img" aria-label={label || tip}
       onPointerDown={e => (lastPtr.current = e.pointerType)} onClick={open}
       onPointerEnter={mouse(true)} onPointerLeave={mouse(false)} onFocus={() => setOn(true)} onBlur={() => setOn(false)}>
