@@ -3,21 +3,22 @@ const cr = (a, b, c, d, t) => [0, 1].map(k => .5 * (2 * b[k] + (-a[k] + c[k]) * 
 
 // Layout constants shared with World.jsx. Everything after the "jack of all trades" strip is pushed right by S
 // to make room for the art sticker (the line threads straight through its head).
-export const S = 640
-export const ART = { x: 2620, y: 300, w: 240, h: 312, ly: 495 } // art sticker box (relative to B); ly = height at which the line pierces the head
+export const S = 280
+export const ART = { x: 2260, y: 300, w: 240, h: 312, ly: 495 } // art sticker box (relative to B); ly = height at which the line pierces the head
 // timeline milestones: [x (before S), y]. Peaks carry the cards above, valleys below, and the climb trends upward.
-export const TLN = [[5620, 440], [6040, 650], [6460, 410], [6880, 640], [7300, 380]]
+export const TLN = [[5620, 650], [6080, 410], [6540, 640], [7000, 380], [7460, 630], [7920, 390]]
 
 export function genLine(B) {
   const s = v => v + S
-  const P = [[B / 2 + 60, 602], [B / 2 + 40, 690], [B / 2 + 300, 690], [B - 200, 540], [B + 60, 410], [B + 285, 305], [B + 560, 470], [B + 600, 650], [B + 800, 665], [B + 1400, 640], [B + 1800, 540], [B + 2000, 340], [B + 2250, 680],
+  const tlp = TLN.flatMap(([x, y], i) => i ? [[(TLN[i - 1][0] + x) / 2, (TLN[i - 1][1] + y) / 2], [x, y]] : [[x, y]]).map(([x, y]) => [B + s(x), y])
+  const P = [[B / 2, 322], [B / 2 - 6, 392], [B / 2 + 22, 480], [B / 2 + 58, 565], [B / 2 + 60, 602], [B / 2 + 40, 690], [B / 2 + 300, 690], [B - 200, 540], [B + 60, 410], [B + 285, 305], [B + 560, 470], [B + 600, 650], [B + 800, 665], [B + 1100, 650], [B + 1440, 540], [B + 1640, 340], [B + 1890, 680],
     // through the art head (flat across the ears, hidden behind the face)
-    [B + 2420, 600], [B + 2540, ART.ly + 5], [B + 2600, ART.ly], [B + 2740, ART.ly], [B + 2880, ART.ly], [B + 2960, ART.ly + 12],
+    [B + 2060, 600], [B + 2180, ART.ly + 5], [B + 2240, ART.ly], [B + 2380, ART.ly], [B + 2520, ART.ly], [B + 2600, ART.ly + 12],
     // few things have my heart
     [B + s(2600), 580], [B + s(2925), 590], [B + s(3150), 745], [B + s(3500), 790], [B + s(3775), 250], [B + s(4100), 430], [B + s(4435), 650], [B + s(4700), 780], [B + s(5100), 640], [B + s(5400), 555],
-    // timeline: the line itself rises and falls through five chapters
-    [B + s(5500), 505], [B + s(5620), 440], [B + s(5830), 550], [B + s(6040), 650], [B + s(6250), 535], [B + s(6460), 410], [B + s(6670), 525], [B + s(6880), 640], [B + s(7090), 505], [B + s(7300), 380], [B + s(7430), 470], [B + s(7560), 555],
-    [B + s(7800), 555], [B + s(8000), 555], [B + s(8350), 555], [B + s(8480), 600]]
+    // timeline: the line itself rises and falls through six chapters
+    [B + s(5500), 590], ...tlp, [B + s(8060), 480], [B + s(8200), 555],
+    [B + s(8450), 555], [B + s(8800), 555], [B + s(8920), 600]]
   const n = P.length, raw = []
   for (let i = 0; i < n - 1; i++) for (let j = 0; j < 40; j++) raw.push(cr(P[Math.max(i - 1, 0)], P[i], P[i + 1], P[Math.min(i + 2, n - 1)], j / 40))
   raw.push(P[n - 1])
@@ -30,7 +31,7 @@ export function genLine(B) {
   }
   const at = rx => base.find(p => p.x >= B + rx) || base[base.length - 1]
   // [x offset from B, radius, arc width, side (+1 below / -1 above)]
-  const loops = [[-60, 120, 340, -1], [1100, 100, 300, 1], [s(4100), 120, 340, 1], [s(5150), 100, 300, 1], [s(8000), 168, 420, 1]].map(([rx, R, w, dir]) => ({ s0: at(rx).s, R, w, dir, ref: at(rx) }))
+  const loops = [[-60, 120, 340, -1], [1100, 100, 300, 1], [s(4100), 120, 340, 1], [s(5150), 100, 300, 1], [s(8500), 168, 420, 1]].map(([rx, R, w, dir]) => ({ s0: at(rx).s, R, w, dir, ref: at(rx) }))
   const xs = [], ys = [], tag = [], tu = []
   base.forEach(p => {
     let ox = 0, oy = 0, t = -1, uu = 1
