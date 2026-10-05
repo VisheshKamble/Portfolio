@@ -65,15 +65,14 @@ footer{position:absolute;right:clamp(20px,6vw,90px);bottom:18px;font-size:11px;c
 @keyframes a2{0%{opacity:1}50%,100%{opacity:0}}@keyframes a3{0%{opacity:0}50%,100%{opacity:1}}
 .work:has(.pill:hover) .row,.work:has(.pill:hover) aside,.work:has(.pill:hover) .more .serif{opacity:.35;transition:opacity .4s}
 /* dive */
-.dive{position:fixed;inset:0;z-index:100;overflow:hidden;animation:dfade .8s 1.95s forwards;cursor:progress}@keyframes dfade{to{opacity:0;visibility:hidden}}
-.dim{position:absolute;inset:0;background:#f7f6f2;opacity:0;animation:dim .5s .1s forwards}.dive.dark .dim{background:#f7f6f2}@keyframes dim{to{opacity:.62}}
-.vx{position:absolute;left:50%;top:50%;width:90vmax;height:90vmax;margin:-45vmax;transform:scale(0);animation:vx 1.8s .35s cubic-bezier(.5,0,.6,1) forwards}
-.vx i{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(#111 0 9deg,transparent 9deg 22deg);-webkit-mask:radial-gradient(circle,#000 8%,transparent 62%);mask:radial-gradient(circle,#000 8%,transparent 62%);filter:blur(2px);animation:rot 1.6s .35s linear infinite}.vx i+i{background:repeating-conic-gradient(#000 0 5deg,transparent 5deg 17deg);animation-direction:reverse;opacity:.75;transform:scale(.8)}
-@keyframes vx{to{transform:scale(1.25)}}@keyframes rot{to{rotate:360deg}}
-.core{position:absolute;left:50%;top:50%;width:30vmax;height:30vmax;margin:-15vmax;border-radius:50%;background:#07070a;transform:scale(0);animation:core 1.2s .8s cubic-bezier(.6,0,.4,1) forwards}.dive.light .core,.dive.light .vx i{background-color:#f7f6f2}@keyframes core{to{transform:scale(6)}}
-.swirl{position:absolute;left:50%;top:50%;width:0;height:0;animation:spin 1.9s cubic-bezier(.65,0,.9,.5) forwards}@keyframes spin{to{transform:rotate(520deg)}}
-.dsk{position:absolute;width:clamp(80px,9vw,130px);margin:-50px;animation:dst 1.9s cubic-bezier(.5,0,.5,1) forwards}.dsk svg{width:100%;overflow:visible;filter:drop-shadow(0 14px 18px #0003)}
-@keyframes dst{0%{transform:translate(var(--bx),var(--by)) scale(.2)}28%{transform:translate(var(--px),var(--py)) scale(1) rotate(var(--r))}100%{transform:translate(0,0) scale(.05) rotate(calc(var(--r) + 260deg))}}
+.dive{position:fixed;inset:0;z-index:100;overflow:hidden;animation:dfade .8s 3.4s forwards;cursor:progress}@keyframes dfade{to{opacity:0;visibility:hidden}}
+.dim{position:absolute;inset:0;opacity:0;animation:dim .6s .05s forwards}.dive.dark .dim{background:#f7f6f2}.dive.light .dim{background:#07070a}@keyframes dim{to{opacity:.6}}
+.lens{position:absolute;left:0;top:0;width:100px;height:100px;border-radius:50%;transform:scale(0);backdrop-filter:blur(2.5px) saturate(1.25);-webkit-backdrop-filter:blur(2.5px) saturate(1.25);-webkit-mask:radial-gradient(circle,#000 38%,transparent 70%);mask:radial-gradient(circle,#000 38%,transparent 70%);pointer-events:none}
+.dcv{position:absolute;inset:0;pointer-events:none}
+.swirl{position:absolute;inset:0;pointer-events:none}
+.dsk{position:absolute;left:0;top:0;opacity:0;will-change:transform,opacity,filter;transform-origin:50% 50%}
+.dsk svg{width:100%;height:auto;display:block;overflow:visible;filter:drop-shadow(0 16px 20px #0003)}.dsk img{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 24px #0004)}
+.fin{position:absolute;inset:0;opacity:0;animation:fin .5s 2.85s ease-in forwards}.dive.dark .fin{background:#07070a}.dive.light .fin{background:#f7f6f2}@keyframes fin{to{opacity:1}}
 /* dark page */
 .dk{--bg:#07070a;--ink:#f1efe8;--mute:#8d8a82;--card:#14141a;--sh:#0000;background:var(--bg);color:var(--ink);min-height:100vh}
 .dk-hero{position:relative;min-height:100vh;padding:22vh clamp(20px,6vw,90px) 6vh;overflow:hidden}

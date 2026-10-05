@@ -7,9 +7,11 @@ import astronautImg from './assets/astronaut.webp'
 import rheadImg from './assets/headphones-rh.webp'
 import brainImg from './assets/brain.webp'
 import leetcodeImg from './assets/leetcode.webp'
+import laptop3Img from './assets/laptop3d.webp'
 const img = (src, alt, w, h) => <img src={src} alt={alt} width={w} height={h} draggable={false} />
 const sh = <ellipse className="sh" cx="70" cy="108" rx="46" ry="6" />
 export const S = {
+  laptop3: img(laptop3Img, 'a laptop with ink motion marks', 700, 636),
   laptop: img(laptopImg, 'a laptop with a smiley and a cat sticker', 265, 193),
   keys: img(keysImg, 'four black keycaps: airplane, code, cloud and a blue cricket one', 386, 306),
   polaroid: <svg viewBox="0 0 140 120">{sh}<rect className="f" x="62" y="8" width="64" height="76" rx="3" transform="rotate(7 94 46)"/><path className="o" d="M72 66l16-18 12 12 8-8 14 14" transform="rotate(7 94 46)"/><rect className="y" x="10" y="42" width="74" height="54" rx="12"/><circle className="f" cx="47" cy="69" r="19"/><circle className="o" cx="47" cy="69" r="8"/><circle className="f" cx="72" cy="52" r="4"/></svg>,
