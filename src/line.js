@@ -15,7 +15,7 @@ export function genLine(B) {
   }
   const at = rx => base.find(p => p.x >= B + rx) || base[base.length - 1]
   // [x offset from B, radius, arc width, side (+1 below / -1 above)]
-  const loops = [[-60, 120, 340, -1], [1100, 100, 300, 1], [4100, 120, 340, 1], [5150, 100, 300, 1], [8000, 150, 380, 1]].map(([rx, R, w, dir]) => ({ s0: at(rx).s, R, w, dir, ref: at(rx) }))
+  const loops = [[-60, 120, 340, -1], [1100, 100, 300, 1], [4100, 120, 340, 1], [5150, 100, 300, 1], [8000, 168, 420, 1]].map(([rx, R, w, dir]) => ({ s0: at(rx).s, R, w, dir, ref: at(rx) }))
   const xs = [], ys = [], tag = [], tu = []
   base.forEach(p => {
     let ox = 0, oy = 0, t = -1, uu = 1
@@ -33,7 +33,8 @@ export function genLine(B) {
   const dots = [[-90, 'notice it.', 'm'], [28, 'understand it.', 's'], [152, 'build it.', 'e']].map(([a, label, anchor]) => {
     const v = [Math.cos(a * Math.PI / 180), Math.sin(a * Math.PI / 180)]; let bi = 0, bd = -1e9
     xs.forEach((x, i) => { if (tag[i] === loops.length - 1 && Math.abs(tu[i]) < .3) { const d = (x - c[0]) * v[0] + (ys[i] - c[1]) * v[1]; if (d > bd) { bd = d; bi = i } } })
-    return { x: xs[bi], y: ys[bi], label, a }
+    return { x: xs[bi], y: ys[bi], label, a, i: bi }
   })
-  return { d: 'M' + xs.map((x, i) => x + ' ' + ys[i]).join('L'), xs, ys, cl, run, total: cl[cl.length - 1], dots, ring: c }
+  let loopEnd = 0; tag.forEach((t, i) => { if (t === loops.length - 1) loopEnd = i })
+  return { loopEnd, d: 'M' + xs.map((x, i) => x + ' ' + ys[i]).join('L'), xs, ys, cl, run, total: cl[cl.length - 1], dots, ring: c }
 }

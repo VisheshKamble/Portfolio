@@ -16,25 +16,58 @@ const TL = [
 ]
 const SENT = 'somehow, i keep ending up taking ownership.'.split(' ')
 
-const SCRIB = (() => {
-  let s = 7; const r = () => (s = (s * 16807) % 2147483647) / 2147483647, pts = []
-  for (let i = 0; i < 46; i++) { const a = i * 2.4, d = 40 + r() * 110; pts.push([200 + Math.cos(a) * d * 1.3 + (r() - .5) * 40, 150 + Math.sin(a * 1.3) * d * .8 + (r() - .5) * 40]) }
-  let d = 'M' + pts[0]
-  for (let i = 1; i < pts.length - 1; i++) d += ` Q${pts[i]} ${(pts[i][0] + pts[i + 1][0]) / 2},${(pts[i][1] + pts[i + 1][1]) / 2}`
-  return d + ' Q330 270 250 360' // tail: the line starts exactly here
-})()
+// Opening scribble: two hand-drawn passes that start hair-thin and get bolder as the scribble winds down,
+// ending at the main line weight (3px; the group is scaled 1.5x, so 2 here) so the line picks up seamlessly. SVG can't taper a stroke, so each pass
+// is cut into many short segments whose widths grow. The tail's end lands exactly where the line starts (250,360).
+const scrib = (seed, n, cx, cy, k, tail, w0, w1) => {
+  let s = seed; const r = () => (s = (s * 16807) % 2147483647) / 2147483647, pts = [], tilt = -.14
+  for (let i = 0; i < n; i++) {
+    const p = i / (n - 1), swell = Math.sin(Math.PI * Math.min(1, p * 1.08)) ** .7 // grows, peaks, settles
+    const a = i * 2.4 + Math.sin(i * .5) * .5, flick = i % 11 === 7 ? 1.45 : 1 // occasional long flick strokes
+    const d = (42 + r() * 135 * swell + 22 * swell) * flick * k
+    const x = Math.cos(a) * d * 1.12 + (r() - .5) * 34, y = Math.sin(a * 1.3) * d * .8 + (r() - .5) * 34
+    pts.push([cx + x * Math.cos(tilt) - y * Math.sin(tilt), cy + x * Math.sin(tilt) + y * Math.cos(tilt)].map(v => +v.toFixed(1)))
+  }
+  if (tail) pts[n - 1] = [338, 205] // settle on the right, ready to hand off to the line
+  const f = v => +v.toFixed(1), segs = []; let cur = pts[0]
+  for (let i = 1; i < n - 1; i++) {
+    const e = [f((pts[i][0] + pts[i + 1][0]) / 2), f((pts[i][1] + pts[i + 1][1]) / 2)]
+    segs.push(`M${cur} Q${pts[i]} ${e}`); cur = e
+  }
+  if (tail) {
+    segs.push(`M${cur} Q345 215 350 250`, 'M350 250 C352 295 318 330 285 342', 'M285 342 Q262 350 250 360')
+  } else segs.push(`M${cur} L${pts[n - 1]}`)
+  const T = segs.length
+  return segs.map((d, j) => ({ d, w: +(w0 + (w1 - w0) * (j / (T - 1)) ** 1.8).toFixed(2) })) // slow to thicken, bold at the end
+}
+const SCRIB = scrib(7, 92, 170, 135, 1, true, .3, 2)
+const SCRIB2 = scrib(23, 54, 175, 140, .9, false, .2, .9)
+const ease = p => p < .5 ? 4 * p ** 3 : 1 - (-2 * p + 2) ** 3 / 2
 
 export default function World() {
-  const outer = useRef(), track = useRef(), line = useRef(), head = useRef(), scrib = useRef()
+  const outer = useRef(), track = useRef(), line = useRef(), head = useRef(), scrib = useRef(), scrib2 = useRef()
   const [vu, setVu] = useState(() => Math.round(innerWidth / unit()))
   const B = vu, W = B + REL, narrow = B < 1300
   const g = useMemo(() => genLine(B), [B])
 
   useEffect(() => { const f = () => setVu(Math.round(innerWidth / unit())); addEventListener('resize', f); return () => removeEventListener('resize', f) }, [])
   useEffect(() => {
-    const sc = scrib.current, L = sc.getTotalLength(); sc.style.strokeDasharray = L
-    const a = sc.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }], { duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 3400, easing: 'cubic-bezier(.5,0,.2,1)', fill: 'forwards' })
-    return () => a.cancel()
+    // draw each pass segment by segment, driven by one eased progress value
+    const prep = g => { let c = 0; return [...g.children].map(el => { const len = el.getTotalLength(), o = { el, len, start: c, on: false }; c += len; el.style.strokeDasharray = len + ' ' + len; el.style.visibility = 'hidden'; return o }) }
+    const passes = [[prep(scrib.current), 4200, 0], [prep(scrib2.current), 3600, 350]]
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+    const paint = (segs, p) => {
+      const tot = segs[segs.length - 1].start + segs[segs.length - 1].len, d = p * tot
+      segs.forEach(o => { const l = Math.min(1, Math.max(0, (d - o.start) / o.len)); o.el.style.strokeDashoffset = o.len * (1 - l); const on = l > 0; if (on !== o.on) { o.on = on; o.el.style.visibility = on ? 'visible' : 'hidden' } })
+    }
+    let raf; const t0 = performance.now()
+    const frame = now => {
+      let done = true
+      passes.forEach(([segs, dur, delay]) => { const t = reduce ? 1 : Math.min(1, Math.max(0, (now - t0 - delay) / dur)); paint(segs, ease(t)); if (t < 1) done = false })
+      if (!done) raf = requestAnimationFrame(frame)
+    }
+    raf = requestAnimationFrame(frame)
+    return () => cancelAnimationFrame(raf)
   }, [])
   useEffect(() => {
     const { xs, ys, cl, run, total } = g, p = line.current, PL = p.getTotalLength()
@@ -47,6 +80,7 @@ export default function World() {
       track.current.style.transform = `translate3d(${-cam * u}px,0,0)`
       p.style.strokeDashoffset = PL * (1 - cl[lo] / total)
       head.current.setAttribute('cx', xs[lo]); head.current.setAttribute('cy', ys[lo])
+      track.current.querySelectorAll('.rv').forEach(e => e.classList.toggle('on', lo >= +e.dataset.i)) // loop labels appear as the pen reaches them
       track.current.querySelectorAll('.w').forEach(w => w.classList.toggle('on', w.getBoundingClientRect().left < vw * .68))
     }
     const size = () => { vw = innerWidth; vh = innerHeight; u = unit(); document.documentElement.style.setProperty('--u', u + 'px'); maxS = total * .62 * u; outer.current.style.height = maxS + vh + 'px'; tick() }
@@ -61,11 +95,11 @@ export default function World() {
       <div className="pin"><div className="track" ref={track} style={{ width: `calc(${W} * var(--u))` }}>
         <svg className="world" viewBox={`0 0 ${W} 900`} aria-hidden="true">
           <circle cx={B / 2} cy={350} r={270} fill="transparent" data-b="yes, it's a loop. i'm aware." />
-          <g transform={`translate(${B / 2 - 240} 170) scale(1.2)`}><path ref={scrib} className="scr" d={SCRIB} /></g>
+          <g transform={`translate(${B / 2 - 315} 62) scale(1.5)`}><g ref={scrib2} opacity=".4">{SCRIB2.map((s, i) => <path key={i} className="scr" d={s.d} style={{ strokeWidth: s.w }} />)}</g><g ref={scrib}>{SCRIB.map((s, i) => <path key={i} className="scr" d={s.d} style={{ strokeWidth: s.w }} />)}</g></g>
           <path ref={line} className="ln" d={g.d} />
           <circle ref={head} className="pen" r="11" cx={g.xs[0]} cy={g.ys[0]} />
-          {[[d1, 'middle', 0, -22], [d2, 'start', 22, 6], [d3, 'end', -22, 6]].map(([d, a, dx, dy]) => <g key={d.label}><circle className="dot" cx={d.x} cy={d.y} r="8" /><text x={d.x + dx} y={d.y + dy} textAnchor={a} className="svt">{d.label}</text></g>)}
-          <text x={g.ring[0]} y={g.ring[1] + 4} textAnchor="middle" className="rep">repeat.</text>
+          {[[d1, 'middle', 0, -22], [d2, 'start', 22, 6], [d3, 'end', -22, 6]].map(([d, a, dx, dy]) => <g key={d.label} className="rv" data-i={d.i}><circle className="dot" cx={d.x} cy={d.y} r="8" /><text x={d.x + dx} y={d.y + dy} textAnchor={a} className="svt">{d.label}</text></g>)}
+          <text x={g.ring[0]} y={g.ring[1] + 4} textAnchor="middle" className="rep rv" data-i={g.loopEnd}>repeat.</text>
         </svg>
 
         <At x={60} y={narrow ? 520 : 610} c="hero-h" b="hey"><h1>the<br />anatomy of a<br /><em>curious developer.</em></h1></At>
@@ -83,9 +117,9 @@ export default function World() {
         <At x={B + 2800} y={100}><h2>but few things<br />have my heart.</h2></At>
         <Stk k="phones" tip="hot reload ⚡" x={B + 2850} y={480} w={150} />
         <At x={B + 3040} y={520} c="beat"><h3>flutter came first.</h3><p>making interfaces feel alive on a tiny screen.</p></At>
-        <Stk k="phones2" tip="turns out, people." x={B + 3700} y={130} w={150} r={-6} />
-        <At x={B + 3880} y={170} c="beat"><h3>turns out, i like people too.</h3><p>building VANI for sign language made code feel personal.</p></At>
-        <Stk k="phones3" tip="thinking…" x={B + 4350} y={480} w={170} r={4} />
+        <Stk k="leetcode" label="leetcode" tip="leetcode.com/u/visheshlovessports ↗" href="https://leetcode.com/u/visheshlovessports/" x={B + 3700} y={110} w={160} r={-6} />
+        <At x={B + 3880} y={170} c="beat"><h3>problem solving, the fun kind.</h3><p>leetcode is where i sharpen my data structures and algorithms, one puzzle at a time.</p></At>
+        <Stk k="brain" tip="thinking… always thinking." x={B + 4290} y={470} w={235} r={-3} />
         <At x={B + 4560} y={500} c="beat"><h3>and now, agents.</h3><p>half engineer. half "what if it just did that for me?"</p></At>
 
         {TL.map(([d, t, s, y], i) => (

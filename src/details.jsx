@@ -5,18 +5,20 @@ import { projects as base } from './art.jsx'
 const svgOf = t => base.find(p => p.title === t)?.svg
 const nexus = <svg viewBox="0 0 120 120"><rect className="f" x="14" y="30" width="92" height="62" rx="12"/><path className="o" d="M14 52h92M28 72h24"/><circle className="y" cx="86" cy="72" r="9"/><path className="o" d="M40 22l10-8 10 8"/></svg>
 const D = [
-  { slug: 'nexuspay', group: 'apps', light: true, ac: '#7c6bff', title: 'NexusPay', kind: 'Application', status: 'application',
-    blurb: 'an application, built end to end.',
-    about: '', points: [], stack: [], svg: nexus }, // TODO: describe NexusPay + add its stack here
-  { slug: 'vani', group: 'apps', light: true, ac: '#ff8a4c', title: 'VANI', kind: 'Application · ML · accessibility', status: 'deployed backend',
+  { slug: 'nexuspay', group: 'apps', light: true, ac: '#2563eb', title: 'NexusPay', kind: 'Application · UPI detection system', status: 'application',
+    blurb: 'a UPI detection system that flags risky payments before you confirm.',
+    about: 'NexusPay is a UPI detection system built as a mobile app. Before a payment goes through it scores the risk, explains why, and lets you cancel; a fraud intelligence center keeps the alerts in one place.',
+    points: ['pre-payment risk check: a risk score with a LOW / MEDIUM / HIGH label and plain-language reasons, e.g. a new receiver not in your contacts or an unknown device', 'Fraud Intelligence Center on the home screen: critical alerts such as a suspicious login attempt, with a security log to review', 'home shortcuts for Scan & Pay, Send Money, Heat Maps and Detect Fraud, plus an account security status card', 'dark, blue-accent UI from onboarding through to the payment warning sheet'],
+    stack: [], svg: nexus }, // TODO: add NexusPay's tech stack to `stack`
+  { slug: 'vani', group: 'apps', light: true, ac: '#2f6bff', title: 'VANI', kind: 'Application · ML · accessibility', status: 'deployed backend',
     blurb: 'indian sign language, recognised on a phone.',
-    about: 'A Flutter app that recognises Indian Sign Language, powered by a YOLOv11 model behind a FastAPI service deployed on Railway. Built because accessibility tech for ISL is something I care about.',
-    points: ['Flutter app talking to a FastAPI + YOLOv11 backend over WebSockets', 'ISL assistant with 10 Indian languages', 'glassmorphism cards, mesh-gradient orbs and arc decorations in the UI', 'debugged the model download pipeline and a WebSocket DNS mismatch against the live Railway domain'],
+    about: 'A Flutter app that recognises Indian Sign Language through the camera and turns it into text and speech, powered by a YOLOv11 model behind a FastAPI service deployed on Railway. It also carries an emergency alert centre, because accessibility tech should work when it matters most.',
+    points: ['live sign recognition through the camera, with a confidence score and the result translated into the language you pick (English and Hindi shown)', 'Output, Builder and Transcript tabs: build sentences sign by sign, keep a transcript, and hear it read aloud', 'Emergency Alert Centre: six emergency types (help, medical, unsafe, fire, road accident, child in danger) that send an alert with your GPS location to your emergency contacts, plus a helpline quick reference', 'Flutter app talking to a FastAPI + YOLOv11 backend over WebSockets', 'debugged the model download pipeline and a WebSocket DNS mismatch against the live Railway domain'],
     stack: ['Flutter', 'FastAPI', 'YOLOv11', 'Railway'] },
-  { slug: 'aurix', group: 'apps', ac: '#c6ff3d', title: 'Aurix', kind: 'Application · fitness · AI coach', status: 'in progress',
+  { slug: 'aurix', group: 'apps', ac: '#ff9500', title: 'Aurix', kind: 'Application · fitness · AI coach', status: 'in progress',
     blurb: 'a fitness app with an AI coach that knows your context.',
     about: 'A Flutter fitness app backed by Supabase, formerly called FitForge. The coach is prompted dynamically from your real training context, so its feedback is about you, not a generic user.',
-    points: ['photo-based meal logging with a Groq vision model', 'AI coach: post-workout feedback and weekly scoring reports', 'plate calculator, progressive overload engine, push notifications', 'client-side resilience layer with typed exceptions and Result-style handling', 'dark, volt-accent UI across dashboard, nav, profile and coach screens'],
+    points: ['photo-based meal logging with a Groq vision model', 'AI coach: post-workout feedback and weekly scoring reports', 'plate calculator, progressive overload engine, push notifications', 'client-side resilience layer with typed exceptions and Result-style handling', 'dark UI with an orange accent: a home dashboard with streak, sets, volume and a daily completion ring', 'nutrition tracker: weekly calorie trend against a target, meals logged with protein, carbs and fat', 'progress analytics: sessions per week and an all-time muscle-split donut'],
     stack: ['Flutter', 'Supabase', 'Groq'] },
   { slug: 'scrybe', group: 'agents', light: true, ac: '#8b6bff', site: '', title: 'Scrybe', kind: 'Agentic AI · video intelligence', status: 'live website',
     blurb: 'an agentic system that understands video.',

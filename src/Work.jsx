@@ -64,7 +64,7 @@ export function Contact() {
       <p className="big">let's build something<br />the internet <em>hasn't seen yet.</em></p>
       <a className="btn fill" href="mailto:you@example.com">you@example.com ↗</a><br />
       <a className="btn" href="#">linkedin ↗</a><a className="btn" href="#">github ↗</a><a className="btn" href="#">x ↗</a>
-      <div className="fun" data-b="hey"><span className="hand">fun fact:<br />i'm building a portfolio<br />before my photo exists.</span><div className="astro2">{S.astro}</div></div>
+      <div className="fun" data-b="hey"><span className="hand">fun fact:<br />i'm building a portfolio<br />before my photo exists.</span><div className="astro2">{S.astronaut}</div></div>
       {/* Replace the span with <img src="/me.png" alt="Vishesh" /> */}
       <div className="me"><span className="hand">your photo<br />goes here</span></div>
       <footer>© 2026 vishesh · <a href="#brain">back to top ↑</a></footer>

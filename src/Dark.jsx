@@ -44,7 +44,8 @@ export default function Dark({ openTitle }) {
       <section className="dk-hero">
         <svg className="stars" aria-hidden="true">{STARS.map(([x, y, z], i) => <circle key={i} cx={x + '%'} cy={y + '%'} r={z} className={i % 5 ? '' : 'tw'} />)}</svg>
         <Earth />
-        <div className="dk-astro">{S.astro}</div>
+        <div className="dk-astro">{S.astronaut}</div>
+        <div className="dk-head" aria-hidden="true">{S.rhead}</div>
         <svg className="orbit" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true"><path d="M180 90C320 60 380 200 520 250S760 330 900 300 1100 330 1200 380" /></svg>
         <h2>you fell in.</h2>
         <p className="sub">don't worry, it's nice down here.</p>
