@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Stk } from './Sticker.jsx'
 import { genLine, S as SH, ART, TLN } from './line.js'
+import starImg from './assets/star3d.webp'
 
 const REL = 9240 + SH
 const unit = () => Math.min(innerHeight / 900, innerWidth / 1000) // world scale: fits height on desktop, width on phones
@@ -123,9 +124,9 @@ export default function World() {
             const up = TL[i][0] === 'up', last = i === TL.length - 1
             return (
               <g key={i} className="rv node" data-i={n.i} transform={`translate(${n.x} ${n.y})`}>
-                <path className="tk" d={up ? 'M0 -20q7 -16 0 -38' : 'M0 20q7 16 0 38'} />
+                <path className="tk" d={last ? 'M0 -38q6 -14 0 -30' : up ? 'M0 -20q7 -16 0 -38' : 'M0 20q7 16 0 38'} />
                 <g className="burst">{Array.from({ length: 10 }, (_, k) => <path key={k} transform={`rotate(${k * 36})`} d="M0 -24v-9" />)}</g>
-                {last ? <path className="star" d="M0 -20 5.5 -6.5 20 -5.5 9 4 12.5 18 0 10.5-12.5 18-9 4-20-5.5-5.5-6.5z" /> : <><circle className="nr" r="15" /><circle className="nd" r="5" /></>}
+                {last ? <image className="star" href={starImg} x="-44" y="-44" width="88" height="88" /> : <><circle className="nr" r="15" /><circle className="nd" r="5" /></>}
                 
               </g>)
           })}
