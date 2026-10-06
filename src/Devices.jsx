@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react'
 import { shotsFor, useShots } from './shots.js'
+import { Cover } from './Covers.jsx'
 
-const Screens = ({ p, cls }) => {
+// Website screenshots crossfade; with none yet, the generated cover art stands in.
+const Shots = ({ p }) => {
   const [shots, i] = useShots(p.slug)
-  return shots.length ? shots.map((s, k) => <img key={s} src={s} alt={`${p.title} screenshot ${k + 1}`} className={k === i ? 'on' : ''} draggable={false} />) : null
+  return shots.length ? shots.map((s, k) => <img key={s} src={s} alt={`${p.title} screenshot ${k + 1}`} className={k === i ? 'on' : ''} draggable={false} />) : <Cover p={p} />
 }
 
 // One placeholder screen (used until real screenshots exist); k varies the layout so sliding is visible.
@@ -62,19 +64,16 @@ export function Phone({ p }) {
 
 // Browser window for the websites (Scrybe, AdaptiveRAG, Agent Researcher).
 export function Browser({ p }) {
-  const [shots] = [useShots(p.slug)[0]]
-  let host = 'your-site-url'; try { if (p.site) host = new URL(p.site).host } catch {}
+  let host = p.site ? '' : p.slug + '.app'; try { if (p.site) host = new URL(p.site).host } catch {}
   return (
     <div className="bw" style={{ '--ac': p.ac }}>
       <div className="bw-bar"><i /><i /><i /><span className="bw-url">{host}</span></div>
-      <div className="bw-screen">
-        <Screens p={p} />
-        {!shots.length && (
-          <div className="bw-ph"><div className="ico">{p.svg}</div><h4>{p.title}</h4><i className="sk" style={{ width: '46%' }} /><i className="sk" style={{ width: '32%' }} /><small>website screenshot goes here</small></div>
-        )}
-      </div>
+      <div className="bw-screen"><Shots p={p} /></div>
     </div>
   )
 }
+
+// Just the page, no browser chrome (the cards on the rabbit-hole page).
+export const Shot = ({ p }) => <div className="shot-s" style={{ '--ac': p.ac }}><Shots p={p} /></div>
 
 export const Visual = ({ p }) => (p.group === 'apps' ? <Phone p={p} /> : <Browser p={p} />)
