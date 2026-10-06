@@ -1,7 +1,9 @@
 import { projects as base } from './art.jsx'
+import { REPOS } from './links.js'
 // All project content. Two groups: 'apps' (shown in an iPhone) and 'agents' (shown as websites).
 // light: true  -> also featured on the light "Work" section. `site` = your live website URL (agents).
 // Screenshots: drop files into src/assets/shots/ named after `slug` (see README.txt there).
+// `code` is filled in from links.js (REPOS). Add a live URL to `site` and a "visit website" button appears.
 const svgOf = t => base.find(p => p.title === t)?.svg
 const nexus = <svg viewBox="0 0 120 120"><rect className="f" x="14" y="30" width="92" height="62" rx="12"/><path className="o" d="M14 52h92M28 72h24"/><circle className="y" cx="86" cy="72" r="9"/><path className="o" d="M40 22l10-8 10 8"/></svg>
 const D = [
@@ -9,7 +11,7 @@ const D = [
     blurb: 'a UPI detection system that flags risky payments before you confirm.',
     about: 'NexusPay is a UPI detection system built as a mobile app. Before a payment goes through it scores the risk, explains why, and lets you cancel; a fraud intelligence center keeps the alerts in one place.',
     points: ['pre-payment risk check: a risk score with a LOW / MEDIUM / HIGH label and plain-language reasons, e.g. a new receiver not in your contacts or an unknown device', 'Fraud Intelligence Center on the home screen: critical alerts such as a suspicious login attempt, with a security log to review', 'home shortcuts for Scan & Pay, Send Money, Heat Maps and Detect Fraud, plus an account security status card', 'dark, blue-accent UI from onboarding through to the payment warning sheet'],
-    stack: [], svg: nexus }, // TODO: add NexusPay's tech stack to `stack`
+    stack: ['Flutter', 'Supabase', 'OpenStreetMap', 'Biometrics'], svg: nexus },
   { slug: 'vani', group: 'apps', light: true, ac: '#2f6bff', title: 'VANI', kind: 'Application · ML · accessibility', status: 'deployed backend',
     blurb: 'indian sign language, recognised on a phone.',
     about: 'A Flutter app that recognises Indian Sign Language through the camera and turns it into text and speech, powered by a YOLOv11 model behind a FastAPI service deployed on Railway. It also carries an emergency alert centre, because accessibility tech should work when it matters most.',
@@ -36,6 +38,6 @@ const D = [
     points: ['multi-step agent graph orchestrated with LangGraph', 'web search through Tavily, fast inference through Groq', 'FastAPI backend, React front end', 'landing and app pages redesigned toward a dense layout with SVG icons and a fixed three-zone sidebar'],
     stack: ['LangGraph', 'FastAPI', 'Groq', 'Tavily', 'React'] },
 ]
-export const all = D.map(d => ({ ...d, svg: d.svg ?? svgOf(d.title) }))
+export const all = D.map(d => ({ ...d, code: REPOS[d.slug], svg: d.svg ?? svgOf(d.title) }))
 export const apps = all.filter(p => p.group === 'apps')
 export const agents = all.filter(p => p.group === 'agents')
