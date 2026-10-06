@@ -2,21 +2,21 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Stk } from './Sticker.jsx'
 import { genLine, S as SH, ART, TLN } from './line.js'
 import starImg from './assets/star3d.webp'
+import { LINKS as L, REPOS } from './links.js'
 
 const REL = 9240 + SH
 const unit = () => Math.min(innerHeight / 900, innerWidth / 1000) // world scale: fits height on desktop, width on phones
 const At = ({ x, y, w, c = '', b, children, r = 0 }) => (
   <div className={'at ' + c} data-b={b} style={{ '--x': x, '--y': y, ...(w ? { '--w': w } : {}), transform: r ? `rotate(${r}deg)` : undefined }}>{children}</div>
 )
-// TODO: put your real GitHub URLs here. Each chapter's text shows a blue bubble with its link on hover / focus / tap.
-const GH = 'https://github.com/' // your profile, e.g. 'https://github.com/yourname'
+// each chapter's text shows a blue link bubble on hover / focus / tap. All URLs come from links.js.
 const LINKS = {
-  1: ['leetcode ↗', 'https://leetcode.com/u/visheshlovessports/'],
-  2: ['nexuspay on github ↗', GH],
-  3: ['vani on github ↗', GH],
-  4: ['ai / ml track on github ↗', GH],
-  5: ['agentic ai track on github ↗', GH],
-  6: ['github ↗', GH],
+  1: ['leetcode ↗', L.leetcode],
+  2: ['nexuspay on github ↗', REPOS.nexuspay],
+  3: ['vani on github ↗', REPOS.vani],
+  4: ['ai / ml track on github ↗', L.github],
+  5: ['agent researcher on github ↗', REPOS['agent-researcher']],
+  6: ['github ↗', L.github],
 }
 const TL = [
   ['dn', 'curious about building apps.', 'flutter, react native and the web, in my second year of diploma. then i tried building a few things.', 'chapter 01 · diploma, year 2'],
