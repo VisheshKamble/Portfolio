@@ -9,11 +9,22 @@ import brainImg from './assets/brain.webp'
 import leetcodeImg from './assets/leetcode.webp'
 import laptop3Img from './assets/laptop3d.webp'
 import artImg from './assets/art.webp'
+import rLaptop from './assets/rh-laptop.webp'
+import rPhone from './assets/rh-phone.webp'
+import rHeadphones from './assets/rh-headphones.webp'
+import rCamera from './assets/rh-camera.webp'
+import rFolder from './assets/rh-folder.webp'
 import meImg from './assets/me.webp'
 import phoneImg from './assets/flutter-phone.webp'
 const img = (src, alt, w, h) => <img src={src} alt={alt} width={w} height={h} draggable={false} />
 const sh = <ellipse className="sh" cx="70" cy="108" rx="46" ry="6" />
 export const S = {
+  // the seven rabbit-hole stickers (dive in / climb out): laptop, telephone, headphones, camera, folder, cricket bat, astronaut
+  rlaptop: img(rLaptop, 'an inked laptop', 900, 818),
+  rphone: img(rPhone, 'an inked telephone receiver', 738, 800),
+  rheadphones: img(rHeadphones, 'inked over-ear headphones', 681, 636),
+  rcamera: img(rCamera, 'a camera', 578, 418),
+  rfolder: img(rFolder, 'a folder', 523, 388),
   laptop3: img(laptop3Img, 'a laptop with ink motion marks', 700, 636),
   laptop: img(laptopImg, 'a laptop with a smiley and a cat sticker', 265, 193),
   keys: img(keysImg, 'four black keycaps: airplane, code, cloud and a blue cricket one', 386, 306),

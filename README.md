@@ -73,3 +73,8 @@ Project view keys: ← → switch project, Esc closes. Any scroll/click/key skip
 ## v6.5 notes
 - The "interested? there's more." CTA is the focal point of Work: handwritten notes with arrows ("i bet you'll love this." / "go on, click it."), a hand-drawn ring that draws itself when the button scrolls into view, and a twinkling spark. Markup in `Work.jsx` (`.more` > `.spot`), styles at the end of `index.css` (`.spot*`). The class is `.spot` because `.cta` is already used by the hero line.
 - Also: `World.jsx` now ignores a scroll/fonts callback that fires after the world has unmounted (the dive switches views), which could throw a harmless "getBoundingClientRect of null" console error right after clicking "more rabbit holes".
+
+## v9.1
+- The dive (in and out of the rabbit hole) now uses only seven stickers: laptop, telephone, headphones, camera, folder, cricket bat, astronaut (`CAST` in `src/Dive.jsx`; images `src/assets/rh-*.webp`, wired in `stickers.jsx`).
+- Real website screenshots for Scrybe, AdaptiveRAG and Agent Researcher in `src/assets/shots/` (the old `scrybe.svg` placeholder is removed); live URLs set as `site` in `src/details.jsx`.
+- v9.2: website screenshots are no longer cropped (screen frames use the screenshots' own 1903:997 ratio: `.bw-screen`, `.shot-s`, `.pv-site .bw-screen`). Removed the floating headphones above the Earth on the dark page.

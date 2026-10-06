@@ -65,7 +65,6 @@ function Hero({ stage }) {
       </svg>
 
       <div className="dk-astro"><div className="par"><div className="flt">{S.astronaut}</div></div></div>
-      <div className="dk-head" aria-hidden="true"><div className="par"><div className="flt">{S.rhead}</div></div></div>
       {SPARKS.map(([x, y, s], i) => <Spark key={i} className="dk-spk" style={{ left: x + '%', top: y + '%', width: s, '--dl': i * .7 + 's' }} />)}
 
       {SQUIGS.map(([x, y, d, dl], i) => (
