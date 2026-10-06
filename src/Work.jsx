@@ -1,7 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { all } from './details.jsx'
 import { Phone, Browser } from './Devices.jsx'
-import Detail from './Detail.jsx'
+import Project from './Project.jsx'
+import { LINKS, ext } from './links.js'
 import { S } from './stickers.jsx'
 import { SIGN } from './signoff.js'
 
@@ -49,7 +50,7 @@ export function Work({ onDive }) {
           </a>
         </div>
       </div>
-      {open && <Detail p={open} onClose={() => setOpen(null)} />}
+      {open && <Project list={feat} start={open} onClose={() => setOpen(null)} />}
     </section>
   )
 }
@@ -77,8 +78,8 @@ export function Contact({ onDive }) {
         <h1><span ref={hi}>oh, hi.</span><br />i'm <em>vishesh.</em></h1>
         <p className="sub">still curious.<br />still building.<br />still opening tabs.</p>
         <p className="big">let's build something<br />the internet <em>hasn't seen yet.</em></p>
-        <a className="cbtn fill" href="mailto:you@example.com"><span>you@example.com</span><i>↗</i></a>
-        <div className="crow"><a className="cbtn" href="#"><span>linkedin</span><i>↗</i></a><a className="cbtn" href="#"><span>github</span><i>↗</i></a><a className="cbtn" href="#"><span>x</span><i>↗</i></a></div>
+        <a className="cbtn fill" href={LINKS.mailto} data-b="say hi"><span>{LINKS.email}</span><i>↗</i></a>
+        <div className="crow"><a className="cbtn" href={LINKS.linkedin} {...ext(LINKS.linkedin)}><span>linkedin</span><i>↗</i></a><a className="cbtn" href={LINKS.github} {...ext(LINKS.github)}><span>github</span><i>↗</i></a><a className="cbtn" href={LINKS.x} {...ext(LINKS.x)}><span>x</span><i>↗</i></a></div>
       </div>
       <div className="fun" data-b="howzat?!">
         <span className="hand">fun fact:<br />i wanted to be a cricketer.<br />even played for mumbai u16.</span>
