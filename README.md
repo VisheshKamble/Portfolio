@@ -69,3 +69,7 @@ TODO: real links (Work.jsx Contact, Dark.jsx drawer buttons), timeline years, ph
 Project view keys: ← → switch project, Esc closes. Any scroll/click/key skips the intro.
 
 **Credit:** `src/assets/earth.webp` is derived from a stock photo carrying a Freepik mark. Confirm the licence or swap in a NASA / licensed image. A credit line is in the footer (`dk-credit` in `Dark.jsx`).
+
+## v6.5 notes
+- The "interested? there's more." CTA is the focal point of Work: handwritten notes with arrows ("i bet you'll love this." / "go on, click it."), a hand-drawn ring that draws itself when the button scrolls into view, and a twinkling spark. Markup in `Work.jsx` (`.more` > `.spot`), styles at the end of `index.css` (`.spot*`). The class is `.spot` because `.cta` is already used by the hero line.
+- Also: `World.jsx` now ignores a scroll/fonts callback that fires after the world has unmounted (the dive switches views), which could throw a harmless "getBoundingClientRect of null" console error right after clicking "more rabbit holes".

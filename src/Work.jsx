@@ -12,6 +12,8 @@ export function Work({ onDive }) {
   const [f, setF] = useState('all'), [open, setOpen] = useState(null)
   const feat = all.filter(p => p.light), apps = feat.filter(p => p.group === 'apps'), agents = feat.filter(p => p.group === 'agents')
   const pick = (e, p) => { e.preventDefault(); setOpen(p) }
+  const spot = useRef()
+  useEffect(() => { const el = spot.current; if (!el) return; const io = new IntersectionObserver(([e]) => e.isIntersecting && (el.classList.add('seen'), io.disconnect()), { threshold: .8 }); io.observe(el); return () => io.disconnect() }, [])
   return (
     <section className="work" id="work">
       <div className="wm" aria-hidden="true">WORKS</div>
@@ -45,9 +47,15 @@ export function Work({ onDive }) {
         </>}
         <div className="more">
           <span className="serif">interested? <span className="g">there's more.</span></span>
-          <a className="btn pill" href="#" data-b="careful" onClick={e => { e.preventDefault(); const r = e.currentTarget.getBoundingClientRect(); onDive(r.left + r.width / 2, r.top + r.height / 2, 'dark') }}>
-            <b className="t1">more rabbit holes →</b><b className="t2">you sure? →</b><b className="t3">okay...</b>
-          </a>
+          <span className="spot" ref={spot}>
+            <span className="hand cn cn1">i bet you'll love this.<svg viewBox="0 0 64 50" width="52" aria-hidden="true"><path d="M4 6C20 3 44 12 56 38M56 38l-12-5M56 38l1-13" /></svg></span>
+            <svg className="ring" viewBox="0 0 340 112" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M26 62C14 30 92 8 178 8s152 14 152 48-76 50-160 50S8 92 20 52C26 32 48 22 78 16" /></svg>
+            <svg className="burst2" viewBox="0 0 56 56" width="46" aria-hidden="true"><path d="M30 26l12-12M34 33l16-4M25 20l3-15" /><path className="y" d="M12 40c1 6 4 9 10 10-6 1-9 4-10 10-1-6-4-9-10-10 6-1 9-4 10-10z" transform="translate(-2 -6) scale(.8)" /></svg>
+            <a className="btn pill" href="#" data-b="careful" onClick={e => { e.preventDefault(); const r = e.currentTarget.getBoundingClientRect(); onDive(r.left + r.width / 2, r.top + r.height / 2, 'dark') }}>
+              <b className="t1">more rabbit holes →</b><b className="t2">you sure? →</b><b className="t3">okay...</b>
+            </a>
+            <span className="hand cn cn2"><svg viewBox="0 0 44 50" width="36" aria-hidden="true"><path d="M34 46C10 42 4 24 12 6M12 6l-9 10M12 6l12 7" /></svg>go on, click it.</span>
+          </span>
         </div>
       </div>
       {open && <Project list={feat} start={open} onClose={() => setOpen(null)} />}

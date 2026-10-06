@@ -91,6 +91,7 @@ export default function World() {
     p.style.strokeDasharray = PL; p2.style.strokeDasharray = PL
     let vw, vh, u, maxS
     const tick = () => {
+      if (!outer.current) return // the dive can fire a scroll after the world unmounts but before this listener is removed
       const s = Math.min(maxS, Math.max(0, -outer.current.getBoundingClientRect().top)), t = s / maxS * total
       let lo = 0, hi = cl.length - 1; while (lo < hi) { const m = (lo + hi) >> 1; cl[m] < t ? (lo = m + 1) : (hi = m) }
       const cam = Math.min(Math.max(0, run[lo] - vw / u * .6), W - vw / u) // camera follows the pen's furthest x: it pauses while the pen loops
@@ -101,7 +102,7 @@ export default function World() {
       track.current.querySelectorAll('.rv').forEach(e => e.classList.toggle('on', lo >= +e.dataset.i)) // loop labels appear as the pen reaches them
       track.current.querySelectorAll('.w,.ink').forEach(w => w.classList.toggle('on', w.getBoundingClientRect().left < vw * .68))
     }
-    const size = () => { vw = innerWidth; vh = innerHeight; u = unit(); document.documentElement.style.setProperty('--u', u + 'px'); maxS = total * .62 * u; outer.current.style.height = maxS + vh + 'px'; tick() }
+    const size = () => { if (!outer.current) return; vw = innerWidth; vh = innerHeight; u = unit(); document.documentElement.style.setProperty('--u', u + 'px'); maxS = total * .62 * u; outer.current.style.height = maxS + vh + 'px'; tick() }
     size(); document.fonts?.ready.then(size)
     addEventListener('resize', size); addEventListener('scroll', tick, { passive: true })
     return () => { removeEventListener('resize', size); removeEventListener('scroll', tick) }
