@@ -50,3 +50,22 @@ TODO: real links (Work.jsx Contact, Dark.jsx drawer buttons), timeline years, ph
 - `me.webp` re-cut: 2x Lanczos upscale, pale matte halo removed, sharpened. It now stands on a soft contact shadow (`.me::before`) instead of a big floating drop-shadow, is a bit smaller, and is no longer faded on mobile. A higher-res original photo cut-out (same filename) will still look best.
 - v6.3: the "flutter came first." sticker is now a 3D phone with gears + code tag (`src/assets/flutter-phone.webp`, wired as `S.phones` in `stickers.jsx`; size/position in `World.jsx`).
 - v6.4: timeline — the last node (coep, cse) is now a glossy 3D star (`src/assets/star3d.webp`, rendered as an inflated gold heightfield with baked shadow). Link bubbles on the lower (`.dn`) chapters now sit above their card, right of the dotted tick, so they never fall off the bottom of the screen (`.tl.dn .tlb` in `index.css`).
+
+
+---
+## v9 — the rabbit hole rebuild
+
+**Flow:** vortex → "down we go." → "you fell in." → space hero (Earth photo, astronaut, line, note) → filter chips → apps in iPhones → agentic cards → full-screen project view → "still more on github" / "climb back out".
+
+| Want to… | Edit |
+|---|---|
+| change any link (GitHub, LinkedIn, X, email, repos) | `src/links.js` — one place, updates everywhere |
+| edit project copy / stack | `src/details.jsx` |
+| add a live website for an agentic project | set `site: 'https://…'` in `src/details.jsx` → a "visit website" button appears |
+| replace the generated cover art with a real screenshot | drop `adaptiverag.png` / `agent-researcher.png` into `src/assets/shots/` |
+| change the cover diagrams | `src/Covers.jsx` |
+| change intro timing | `useIntro` in `src/Dark.jsx` (2300ms / 4300ms) |
+
+Project view keys: ← → switch project, Esc closes. Any scroll/click/key skips the intro.
+
+**Credit:** `src/assets/earth.webp` is derived from a stock photo carrying a Freepik mark. Confirm the licence or swap in a NASA / licensed image. A credit line is in the footer (`dk-credit` in `Dark.jsx`).
